@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Car</key>
+	<dict>
+		<key>Name</key>
+		<string>string benz</string>
+		<key>Price</key>
+		<string>int price</string>
+		<key>Style</key>
+		<string>int style</string>
+		<key>Tire</key>
+		<string>object Tire tire</string>
+	</dict>
+	<key>Tire</key>
+	<dict>
+		<key>Size</key>
+		<string>int size</string>
+		<key>Weight</key>
+		<string>int weight</string>
+		<key>Band</key>
+		<string>string band</string>
+	</dict>
+</dict>
+</plist>
