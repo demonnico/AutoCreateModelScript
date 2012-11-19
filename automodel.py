@@ -8,9 +8,11 @@ def judgeParamStyle(cells):
     elif cmp(cells[0],'bool')==0:
         return ["assign","BOOL"]
     elif cmp(cells[0],'string')==0:
-        return ["copy","NSString"+" *"]
+        return ["copy","NSString *"]
     elif cmp(cells[0],'float')==0:
         return ["assign","int"]
+    elif cmp(cells[0],'list')==0:
+        return ["retain","NSArray *"]
     else:
         return ["retain",cells[1]+" *"]
     
@@ -63,6 +65,8 @@ def parseSentenceSuffix(attri):
         return "[data valueForKey:@\""+attri[1]+"\"];\n"
     elif cmp(attri[0],'float')==0:
         return "[[data valueForKey:@\""+attri[1]+"\"]    floatValue];\n"
+    elif cmp(attri[0],'list')==0:
+        return "["+attri[1]+" parses:[data valueForKey:@\""+attri[2]+"\"]];\n"
     else:
         return "["+attri[1]+" parse:[data valueForKey:@\""+attri[2]+"\"]];\n"
     
