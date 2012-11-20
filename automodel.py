@@ -14,7 +14,7 @@ def judgeParamStyle(cells):
     elif cmp(cells[0],'list')==0:
         return ["retain","NSArray *"]
     else:
-        return ["retain",cells[1]+" *"]
+        return ["retain",cells[0]+" *"]
     
 
 def parseCell(cellword):
@@ -57,6 +57,7 @@ def writeParsesMethod(className,implementDict,implementFile):
     implementFile.write(parsesMethod+"\n")
     
 def parseSentenceSuffix(attri):
+    print "process data:<"+attri[0]+">  <"+attri[1]+">"
     if  cmp(attri[0],'int')==0:
         return "[[data valueForKey:@\""+attri[1]+"\"]    intValue];\n"
     elif cmp(attri[0],'bool')==0:
@@ -68,7 +69,7 @@ def parseSentenceSuffix(attri):
     elif cmp(attri[0],'list')==0:
         return "["+attri[1]+" parses:[data valueForKey:@\""+attri[2]+"\"]];\n"
     else:
-        return "["+attri[1]+" parse:[data valueForKey:@\""+attri[2]+"\"]];\n"
+        return "["+attri[0]+" parse:[data valueForKey:@\""+attri[1]+"\"]];\n"
     
 def parseParams(headFile,implementFile,params):
     for key in params.keys():
