@@ -3,19 +3,19 @@
 @class Tire;
 
 @interface Car :NSObject
-@property (nonatomic,assign) int  Price;
-@property (nonatomic,copy) NSString *  Name;
-@property (nonatomic,retain) Tire *  Tire;
-@property (nonatomic,assign) int  Style;
+@property (nonatomic,assign) int  price;
+@property (nonatomic,assign) int  style;
+@property (nonatomic,copy) NSString *  name;
+@property (nonatomic,retain) Tire *  tire;
 
 +(Car*)parse:(id)data;
 +(NSArray*)parses:(id)data;
 @end
 
 @interface Tire :NSObject
-@property (nonatomic,copy) NSString *  Band;
-@property (nonatomic,assign) int  Weight;
-@property (nonatomic,assign) int  Size;
+@property (nonatomic,copy) NSString *  band;
+@property (nonatomic,assign) int  weight;
+@property (nonatomic,assign) int  size;
 
 +(Tire*)parse:(id)data;
 +(NSArray*)parses:(id)data;

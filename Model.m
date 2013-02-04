@@ -6,10 +6,10 @@
 	if(!data) return nil;
 
 	Car * model = [[[Car alloc] init] autorelease];
-	model.Price = [[data valueForKey:@"price"]    intValue];
-	model.Name = [data valueForKey:@"benz"];
-	model.Tire = [Tire parse:[data valueForKey:@"tire"]];
-	model.Style = [[data valueForKey:@"style"]    intValue];
+	model.price = [[data valueForKey:@"price"]    intValue];
+	model.style = [[data valueForKey:@"style"]    intValue];
+	model.name = [data valueForKey:@"benz"];
+	model.tire = [Tire parse:[data valueForKey:@"tire"]];
 
 	return model;
 }
@@ -25,6 +25,15 @@
     }
     return list;
 }
+
+- (void)dealloc
+{
+    [_benz     release];
+    [_tire     release];
+
+    [super dealloc];
+}
+    
 @end
 
 @implementation Tire
@@ -33,9 +42,9 @@
 	if(!data) return nil;
 
 	Tire * model = [[[Tire alloc] init] autorelease];
-	model.Band = [data valueForKey:@"band"];
-	model.Weight = [[data valueForKey:@"weight"]    intValue];
-	model.Size = [[data valueForKey:@"size"]    intValue];
+	model.band = [data valueForKey:@"band"];
+	model.weight = [[data valueForKey:@"weight"]    intValue];
+	model.size = [[data valueForKey:@"size"]    intValue];
 
 	return model;
 }
@@ -51,5 +60,13 @@
     }
     return list;
 }
+
+- (void)dealloc
+{
+    [_band     release];
+
+    [super dealloc];
+}
+    
 @end
 
