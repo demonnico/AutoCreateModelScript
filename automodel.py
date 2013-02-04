@@ -35,11 +35,30 @@ def writeParseMethod(className,implementDict,implementFile):
     
     for key in implementDict.keys():
         attri   = shlex.split(implementDict[key])
-        setence = "\t"+"model."+key+" = "+parseSentenceSuffix(attri)
-        implementFile.write(setence)
+        sentence = "\t"+"model."+key+" = "+parseSentenceSuffix(attri)
+        implementFile.write(sentence)
     
     implementFile.write("\n\t"+"return model;\n")
     implementFile.write("}\n")
+
+def writeDeallocMethod(className,implementDict,implementFile):
+    deallocMethod_header="""
+- (void)dealloc
+{\n"""
+
+    for key in implementDict.keys():
+        attri   = shlex.split(implementDict[key])
+        isObj   = judgeIsObjct(attri[0])
+        if  isObj==1:
+            deallocMethod_header+='    [_'+attri[1]+'     '+'release];\n'
+        else:
+            print 'its not a object'+attri[0]+attri[1]
+
+    deallocMethod_tail="""
+    [super dealloc];
+}
+    """
+    implementFile.write(deallocMethod_header+deallocMethod_tail+"\n");
 
 def writeParsesMethod(className,implementDict,implementFile):
     parsesMethod="""
@@ -70,6 +89,13 @@ def parseSentenceSuffix(attri):
         return "["+attri[1]+" parses:[data valueForKey:@\""+attri[2]+"\"]];\n"
     else:
         return "["+attri[0]+" parse:[data valueForKey:@\""+attri[1]+"\"]];\n"
+
+def judgeIsObjct(obj):
+    if cmp(obj,'int')==0 or cmp(obj,'bool')==0 or cmp(obj[0],'float')==0:
+        return  0
+    else:
+        return 1
+    
     
 def parseParams(headFile,implementFile,params):
     for key in params.keys():
@@ -80,11 +106,11 @@ def parseParams(headFile,implementFile,params):
         print propertys
         headFile.write(propertys)
 
-def parseFile(path,Model,wirteType):
+def parseFile(path,Model,writeType):
     print 'enter parsePlist'
     lib = plistlib.readPlist(path)
-    headFile     =open(Model+'.h', wirteType)
-    implementFile =open(Model+'.m', wirteType)
+    headFile     =open(Model+'.h', writeType)
+    implementFile =open(Model+'.m', writeType)
 
     headFile.write("#import <Foundation/Foundation.h>\n")
     implementFile.write("#import \""+Model+".h\"\n\n")
@@ -105,6 +131,7 @@ def parseFile(path,Model,wirteType):
         value = lib[key]
         writeParseMethod(key,value,implementFile)
         writeParsesMethod(key,value,implementFile)
+        writeDeallocMethod(key,value,implementFile)
         implementFile.write("@end\n\n")
     
     headFile.close()

@@ -4,22 +4,22 @@
 <dict>
 	<key>Car</key>
 	<dict>
-		<key>Name</key>
+		<key>name</key>
 		<string>string benz</string>
-		<key>Price</key>
+		<key>price</key>
 		<string>int price</string>
-		<key>Style</key>
+		<key>style</key>
 		<string>int style</string>
-		<key>Tire</key>
-		<string>object Tire tire</string>
+		<key>tire</key>
+		<string>Tire tire</string>
 	</dict>
 	<key>Tire</key>
 	<dict>
-		<key>Size</key>
+		<key>size</key>
 		<string>int size</string>
-		<key>Weight</key>
+		<key>weight</key>
 		<string>int weight</string>
-		<key>Band</key>
+		<key>band</key>
 		<string>string band</string>
 	</dict>
 </dict>
